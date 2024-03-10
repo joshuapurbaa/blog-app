@@ -31,6 +31,9 @@ class AuthGradientButton extends StatelessWidget {
           fixedSize: const Size(395, 55),
           backgroundColor: AppPallete.transparentColor,
           shadowColor: AppPallete.transparentColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(7),
+          ),
         ),
         child: Text(
           buttonText,
