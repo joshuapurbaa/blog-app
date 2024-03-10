@@ -8,7 +8,7 @@ abstract interface class AuthRepository {
     required String email,
     required String password,
   });
-  AuthResult<User> loginWithEmailPassword({
+  AuthResult<User> signInWithEmailPassword({
     required String email,
     required String password,
   });

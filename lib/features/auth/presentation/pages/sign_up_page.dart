@@ -1,5 +1,5 @@
 import 'package:blog_app/core/theme/app_pallete.dart';
-import 'package:blog_app/features/auth/presentation/pages/login_page.dart';
+import 'package:blog_app/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_field.dart';
 import 'package:blog_app/features/auth/presentation/widgets/auth_gradient_button.dart';
 import 'package:flutter/material.dart';
@@ -83,7 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
-                  Navigator.push(context, LoginPage.route());
+                  Navigator.push(context, SignInPage.route());
                 },
                 child: RichText(
                   text: TextSpan(
