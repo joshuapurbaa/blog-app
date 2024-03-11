@@ -4,7 +4,7 @@ final serviceLocator = GetIt.instance;
 
 Future<void> initDependencies() async {
   WidgetsFlutterBinding.ensureInitialized();
-  _initAuth();
+
   final supabase = await Supabase.initialize(
     url: AppSecrets.supabaseUrl,
     anonKey: AppSecrets.supabaseAnonKey,
@@ -15,19 +15,28 @@ Future<void> initDependencies() async {
   );
 
   // core
-
-  serviceLocator.registerFactory(() => InternetConnection());
-  serviceLocator.registerLazySingleton(() => AppUserCubit());
   serviceLocator.registerFactory(
-    () => ConnectionCheckerImpl(serviceLocator()),
+    () => InternetConnection(),
   );
+  serviceLocator.registerLazySingleton(
+    () => AppUserCubit(),
+  );
+  serviceLocator.registerFactory(
+    () => ConnectionCheckerImpl(
+      serviceLocator(),
+    ),
+  );
+
+  _initAuth();
 }
 
 void _initAuth() {
   // datasource
   serviceLocator
     ..registerFactory<AuthRemoteDataSource>(
-      () => AuthRemoteDataSourceImpl(serviceLocator()),
+      () => AuthRemoteDataSourceImpl(
+        serviceLocator(),
+      ),
     )
     // repository
     ..registerFactory<AuthRepository>(
