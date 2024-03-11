@@ -12,7 +12,10 @@ class AuthRepoImpl implements AuthRepository {
   final AuthRemoteDataSource authRemoteDataSource;
   final ConnectionChecker connectionChecker;
 
-  AuthRepoImpl(this.authRemoteDataSource, this.connectionChecker);
+  AuthRepoImpl(
+    this.authRemoteDataSource,
+    this.connectionChecker,
+  );
 
   @override
   AuthResult<User> currentUser() async {
