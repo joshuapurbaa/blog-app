@@ -11,6 +11,7 @@ class UserSignIn implements AuthUsecase<User, UserSignInParams> {
 
   @override
   Future<Either<Failure, User>> call(UserSignInParams params) async {
+    print(' UserSignIn :: call');
     return await repository.signInWithEmailPassword(
       email: params.email,
       password: params.password,

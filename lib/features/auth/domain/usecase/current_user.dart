@@ -11,6 +11,8 @@ class CurrentUser implements AuthUsecase<User, NoParams> {
 
   @override
   Future<Either<Failure, User>> call(NoParams params) async {
-    return await repository.currentUser();
+    final result = await repository.currentUser();
+    print('current user usecase :: call :: $result');
+    return result;
   }
 }

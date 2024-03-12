@@ -5,8 +5,8 @@ sealed class AppUserState {}
 
 final class AppUserInitial extends AppUserState {}
 
-final class AppUserLoggedId extends AppUserState {
+final class AppUserLoggedIn extends AppUserState {
   final User user;
 
-  AppUserLoggedId(this.user);
+  AppUserLoggedIn(this.user);
 }

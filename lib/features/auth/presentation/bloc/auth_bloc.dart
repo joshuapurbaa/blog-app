@@ -3,7 +3,7 @@ import 'package:blog_app/core/common/entities/user.dart';
 import 'package:blog_app/core/usecase/auth_usecase.dart';
 import 'package:blog_app/features/auth/domain/usecase/user_sign_in.dart';
 import 'package:blog_app/features/auth/domain/usecase/user_sign_up.dart';
-import 'package:blog_app/features/auth/presentation/pages/current_user.dart';
+import 'package:blog_app/features/auth/domain/usecase/current_user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -33,11 +33,22 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   void _isUserLoggedIn(
-      AuthIsUserLoggedInEvent event, Emitter<AuthState> emit) async {
-    final result = await _currentUser(const NoParams());
+    AuthIsUserLoggedInEvent event,
+    Emitter<AuthState> emit,
+  ) async {
+    final result = await _currentUser(
+      const NoParams(),
+    );
+
+    print('result current user :: $result');
 
     result.fold(
-      (failure) => emit(AuthFailure(message: failure.message)),
+      (failure) {
+        print('failure message :: ${failure.message}');
+        return emit(
+          AuthFailure(message: failure.message),
+        );
+      },
       (user) => _emitAuthSuccess(user, emit),
     );
   }
@@ -49,6 +60,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: event.password,
       ),
     );
+
+    print('result sign in  auth bloc :: $result');
 
     result.fold(
       (failure) => emit(AuthFailure(message: failure.message)),
@@ -64,6 +77,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         password: event.password,
       ),
     );
+
+    print('result sign up auth bloc :: $result');
 
     result.fold(
       (failure) => emit(AuthFailure(message: failure.message)),

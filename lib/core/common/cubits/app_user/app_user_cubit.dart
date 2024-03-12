@@ -8,10 +8,15 @@ class AppUserCubit extends Cubit<AppUserState> {
   AppUserCubit() : super(AppUserInitial());
 
   void updateUser(User? user) {
+    print('updateUser cubit :: $user');
     if (user != null) {
-      emit(AppUserLoggedId(user));
+      emit(
+        AppUserLoggedIn(user),
+      );
     } else {
-      emit(AppUserInitial());
+      emit(
+        AppUserInitial(),
+      );
     }
   }
 }

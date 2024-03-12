@@ -23,6 +23,7 @@ class AuthRepoImpl implements AuthRepository {
       if (!await (connectionChecker.isConnected)) {
         final session = authRemoteDataSource.currentUserSession;
         if (session == null) {
+          print('session user :: ${session?.user.id}');
           return left(Failure('User not logged in'));
         }
 
